@@ -71,6 +71,8 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=event.message.text))
 
+    TextSendMessage('あいうえお')
+
     msg = event.message.text.encode('utf-8')
     if msg in f_msg:
         publish_aircon_control_msg('W')
