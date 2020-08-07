@@ -26,8 +26,8 @@ line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 # 動作を起こすメッセージのリスト
-f_msg = [s.encode('utf-8') for s in ['W']]
-b_msg = [s.encode('utf-8') for s in ['S']]
+f_msg = [s.encode('utf-8') for s in ['On']]
+b_msg = [s.encode('utf-8') for s in ['Off']]
 l_msg = [s.encode('utf-8') for s in ['A']]
 r_msg = [s.encode('utf-8') for s in ['D']]
 s_msg = [s.encode('utf-8') for s in ['O']]
@@ -66,16 +66,14 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text+'あいうえお'))
-
 
     msg = event.message.text.encode('utf-8')
     if msg in f_msg:
-        publish_aircon_control_msg('W')
+	    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='ledをつけるよ'))
+        publish_aircon_control_msg('on')
     elif msg in b_msg:
-        publish_aircon_control_msg('S')
+	    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='ledを消すよ'))
+        publish_aircon_control_msg('off')
     elif msg in l_msg:
         publish_aircon_control_msg('A')
     elif msg in r_msg:
