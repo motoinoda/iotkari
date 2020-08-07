@@ -68,12 +68,8 @@ def handle_message(event):
 
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text+'bb'))
+        TextSendMessage(text=event.message.text+'あいうえお'))
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text='bfewaiufhb'))
-    line_bot_api.broadcast(TextSendMessage(text='jafwoie'))
 
     msg = event.message.text.encode('utf-8')
     if msg in f_msg:
