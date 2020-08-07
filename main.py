@@ -70,7 +70,7 @@ def handle_message(event):
     
     msg = event.message.text.encode('utf-8')
     if msg in f_msg:
-		line_bot_api.reply_message(event.reply_token,[TextSendMessage(text='ledつける')])
+		line_bot_api.reply_message(event.reply_token,TextSendMessage(text='ledつける'))
         publish_aircon_control_msg('on')
     elif msg in b_msg:
         publish_aircon_control_msg('off')
