@@ -65,7 +65,8 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-	st='ledをつけるよ'
+	st='間違ってます'
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=st))
     if msg in f_msg:
     	st='ledをつけるよ'
         publish_aircon_control_msg('on')
@@ -79,7 +80,6 @@ def handle_message(event):
     elif msg in s_msg:
         publish_aircon_control_msg('O') 
     
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=st))
     msg = event.message.text.encode('utf-8')
 
 
