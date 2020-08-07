@@ -66,13 +66,13 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
+	# line_bot_api.reply_message(event.reply_token,[TextSendMessage(text='led消す')])
     
     msg = event.message.text.encode('utf-8')
     if msg in f_msg:
-    	line_bot_api.reply_message(event.reply_token,[TextSendMessage(text='ledつける')])
+		line_bot_api.reply_message(event.reply_token,[TextSendMessage(text='ledつける')])
         publish_aircon_control_msg('on')
     elif msg in b_msg:
-    	line_bot_api.reply_message(event.reply_token,[TextSendMessage(text='led消す')])
         publish_aircon_control_msg('off')
     elif msg in l_msg:
         publish_aircon_control_msg('A')
