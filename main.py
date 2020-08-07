@@ -65,8 +65,9 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-	
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='jofewiajf'))
+	st="aiueo"
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=st))
+    msg = event.message.text.encode('utf-8')
     if msg in f_msg:
         publish_aircon_control_msg('on')
     elif msg in b_msg:
@@ -78,7 +79,6 @@ def handle_message(event):
     elif msg in s_msg:
         publish_aircon_control_msg('O') 
     
-    msg = event.message.text.encode('utf-8')
 
 
 if __name__ == '__main__':
