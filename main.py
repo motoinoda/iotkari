@@ -4,13 +4,13 @@ import os
 import json
 
 from linebot import (
-    LineBotApi, WebhookHandler
+	LineBotApi, WebhookHandler
 )
 from linebot.exceptions import (
-    InvalidSignatureError
+	InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+	MessageEvent, TextMessage, TextSendMessage,
 )
 
 app = Flask(__name__)
@@ -35,31 +35,31 @@ s_msg = [s.encode('utf-8') for s in ['O']]
 
 # LINEに通知メッセージを送る
 def broadcast_line_msg(msg):
-    line_bot_api.broadcast(TextSendMessage(text=msg))
+	line_bot_api.broadcast(TextSendMessage(text=msg))
 
 # エアコン制御用のMQTTをパブリッシュする
 def publish_aircon_control_msg(msg):
-    publish.single('iotkari/motor_control', \
-                    msg, \
-                    hostname='mqtt.beebotte.com', \
-                    port=8883, \
-                    auth = {'username':'token:{}'.format(YOUR_BEEBOTTE_TOKEN)}, \
-                    tls={'ca_certs':'mqtt.beebotte.com.pem'})
+	publish.single('iotkari/motor_control', \
+		msg, \
+		hostname='mqtt.beebotte.com', \
+		port=8883, \
+		auth = {'username':'token:{}'.format(YOUR_BEEBOTTE_TOKEN)}, \
+		tls={'ca_certs':'mqtt.beebotte.com.pem'})
 
 @app.route('/callback', methods=['POST'])
 def callback():
-    # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
+	# get X-Line-Signature header value
+	signature = request.headers['X-Line-Signature']
 
-    # get request body as text
-    body = request.get_data(as_text=True)
-    app.logger.info('Request body: ' + body)
+	# get request body as text
+	body = request.get_data(as_text=True)
+	app.logger.info('Request body: ' + body)
 
-    # handle webhook body
-    try:
-        handler.handle(body, signature)
+	# handle webhook body
+	try:
+		handler.handle(body, signature)
     except InvalidSignatureError:
-        abort(400)
+		abort(400)
 
     return 'OK'
 
@@ -71,18 +71,18 @@ def handle_message(event):
     msg = event.message.text.encode('utf-8')
     if msg in f_msg:
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text='ledつける'))
-        publish_aircon_control_msg('on')
+		publish_aircon_control_msg('on')
     elif msg in b_msg:
-        publish_aircon_control_msg('off')
+		publish_aircon_control_msg('off')
     elif msg in l_msg:
-        publish_aircon_control_msg('A')
+		publish_aircon_control_msg('A')
     elif msg in r_msg:
-        publish_aircon_control_msg('D') 
+		publish_aircon_control_msg('D') 
     elif msg in s_msg:
-        publish_aircon_control_msg('O') 
+		publish_aircon_control_msg('O') 
     
 
 
 if __name__ == '__main__':
-    port = int(os.getenv('PORT'))
-    app.run(host='0.0.0.0', port=port)
+	port = int(os.getenv('PORT'))
+	app.run(host='0.0.0.0', port=port)
