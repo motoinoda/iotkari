@@ -70,7 +70,7 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=event.message.text+'aa'))
 
-    TextSendMessage(text="iauot")
+    line_bot_api.broadcast(TextSendMessage(text='あいうえお'))
 
     msg = event.message.text.encode('utf-8')
     if msg in f_msg:
