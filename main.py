@@ -75,7 +75,7 @@ def handle_message(event):
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text='led消す'))
 		publish_aircon_control_msg('off')
 	elif msg in l_msg:
-		publish_aircon_control_msg('A')
+		publish_aircon_control_msg('aiueokakikukeko')
 	elif msg in r_msg:
 		publish_aircon_control_msg('D') 
 	elif msg in s_msg:
