@@ -26,8 +26,8 @@ line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 # 動作を起こすメッセージのリスト
-f_msg = [s.encode('utf-8') for s in ['1']]
-b_msg = [s.encode('utf-8') for s in ['2']]
+f_msg = [s.encode('utf-8') for s in ['On']]
+b_msg = [s.encode('utf-8') for s in ['Off']]
 l_msg = [s.encode('utf-8') for s in ['3']]
 r_msg = [s.encode('utf-8') for s in ['4']]
 s_msg = [s.encode('utf-8') for s in ['5']]
