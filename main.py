@@ -26,11 +26,11 @@ line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 # 動作を起こすメッセージのリスト
-f_msg = [s.encode('utf-8') for s in ['On']]
-b_msg = [s.encode('utf-8') for s in ['Off']]
-l_msg = [s.encode('utf-8') for s in ['A']]
-r_msg = [s.encode('utf-8') for s in ['D']]
-s_msg = [s.encode('utf-8') for s in ['O']]
+f_msg = [s.encode('utf-8') for s in ['1']]
+b_msg = [s.encode('utf-8') for s in ['2']]
+l_msg = [s.encode('utf-8') for s in ['3']]
+r_msg = [s.encode('utf-8') for s in ['4']]
+s_msg = [s.encode('utf-8') for s in ['5']]
 
 
 # LINEに通知メッセージを送る
@@ -70,16 +70,16 @@ def handle_message(event):
 	msg = event.message.text.encode('utf-8')
 	if msg in f_msg:
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text='ledつける'))
-		publish_aircon_control_msg('on')
+		publish_aircon_control_msg('1')
 	elif msg in b_msg:
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text='led消す'))
-		publish_aircon_control_msg('off')
+		publish_aircon_control_msg('2')
 	elif msg in l_msg:
-		publish_aircon_control_msg('aiueokakikukeko')
+		publish_aircon_control_msg('3')
 	elif msg in r_msg:
-		publish_aircon_control_msg('D') 
+		publish_aircon_control_msg('4') 
 	elif msg in s_msg:
-		publish_aircon_control_msg('O') 
+		publish_aircon_control_msg('5') 
 	
 
 
